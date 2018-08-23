@@ -1,6 +1,6 @@
 [package]
 name = "rkdb"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Rahul Powar <rahul@redsift.io>"]
 links = "kdb"
 build = "build.rs"
