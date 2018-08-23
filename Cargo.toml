@@ -1,13 +1,13 @@
 [package]
 name = "rkdb"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Rahul Powar <rahul@redsift.io>"]
 links = "kdb"
 build = "build.rs"
 description = "KDB-Rust embedding and IPC"
 repository = "https://github.com/redsift/rkdb"
 readme = "README.md"
-license-file = "LICENSE"
+license = "MIT"
 keywords = [ "q", "kdb" ]
 categories = [ "external-ffi-bindings", "database" ]
 
@@ -27,3 +27,7 @@ name = "rkdb"
 [features]
 api = []
 unchecked_utf8 = [] # Use faster but unsafe string conversion
+
+[badges]
+circle-ci = { repository = "https://github.com/redsift/rkdb", branch = "master" }
+maintenance = { status = "actively-developed" }
