@@ -15,6 +15,7 @@ jobs:
     docker:
       - image: *default_image
     steps:
+      - checkout      
       - run:
           name: Publish package
           command: |
