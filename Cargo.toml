@@ -7,7 +7,7 @@ build = "build.rs"
 description = "KDB-Rust embedding and IPC"
 repository = "https://github.com/redsift/rkdb"
 readme = "README.md"
-license-file = "LICENSE"
+license = "MIT"
 keywords = [ "q", "kdb" ]
 categories = [ "external-ffi-bindings", "database" ]
 
