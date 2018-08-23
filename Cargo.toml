@@ -27,3 +27,7 @@ name = "rkdb"
 [features]
 api = []
 unchecked_utf8 = [] # Use faster but unsafe string conversion
+
+[badges]
+circle-ci = { repository = "https://github.com/redsift/rkdb", branch = "master" }
+maintenance = { status = "actively-developed" }
