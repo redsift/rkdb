@@ -1,0 +1,29 @@
+[package]
+name = "rkdb"
+version = "0.2.0"
+authors = ["Rahul Powar <rahul@redsift.io>"]
+links = "kdb"
+build = "build.rs"
+description = "Rust bindings for KDB+"
+repository = "https://github.com/redsift/rkdb"
+readme = "README.md"
+license-file = "LICENSE"
+keywords = [ "q", "kdb" ]
+categories = [ "external-ffi-bindings", "database" ]
+
+[dependencies]
+libc = "*"
+num = "*"
+bitflags = "*"
+nix = "*"
+lazy_static = "*"
+
+[build-dependencies]
+syn = {version = "*", features = ["full", "extra-traits"] }
+
+[lib]
+name = "rkdb"
+
+[features]
+api = []
+unchecked_utf8 = [] # Use faster but unsafe string conversion

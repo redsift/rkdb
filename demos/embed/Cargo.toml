@@ -1,0 +1,14 @@
+[package]
+name = "embed"
+version = "0.1.0"
+authors = ["Alex Whitney <awhitney@tylercapital.co.uk>"]
+
+[dependencies]
+num = "*"
+
+[dependencies.rkdb]
+path = "../.."
+
+[lib]
+name = "embed"
+crate-type = ["dylib"]

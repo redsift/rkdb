@@ -1,0 +1,5 @@
+sleep: `libembed 2:(`ksleep;1)
+mean: `libembed 2:(`kmean;1)
+printer: `libembed 2:(`kprinter;1)
+dictex: `libembed 2:(`kdictex;1)
+tableex: `libembed 2:(`ktableex;1)
