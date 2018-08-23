@@ -2,6 +2,10 @@
 
 kdb+ bindings for Rust. Originally forked from and substantially based on the Krust cargo package by [adwhit](https://github.com/adwhit/krust) via [robsmith11](https://github.com/robsmith11/krust).
 
+[![Circle CI](https://img.shields.io/circleci/project/redsift/rkdb.svg?logo=circleci)](https://circleci.com/gh/redsift/rkdb)
+[![Latest version](https://img.shields.io/crates/v/rkdb.svg)](https://crates.io/crates/rkdb)
+![License](https://img.shields.io/crates/l/rkdb.svg)
+
 These bindings enable Rust to be used as inside Q to add additional functionality.
 More generally they also enable Rust to communicate with kdb+ in a memory-safe way.
 
