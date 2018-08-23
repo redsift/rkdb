@@ -1,8 +1,9 @@
+// the difference between the configurations is that api a) links to libkdb.a and b) includes ipc
 use types::*;
 
-// the difference between the configurations is that api a) links to libkdb.a and b) includes ipc
 #[cfg(feature="api")]
 #[link(name="kdb")]
+
 extern "C" {
     pub fn ktn(arg1: I, arg2: J) -> *const K;      // create list
     pub fn knk(arg1: I, ...) -> *const K;          // create mixed list

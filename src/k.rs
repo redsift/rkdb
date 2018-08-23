@@ -1,3 +1,4 @@
+// for embedding
 use types::*;
 
 #[cfg(not(feature="api"))]
