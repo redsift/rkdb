@@ -1,9 +1,9 @@
 # rkdb
 
-KDB bindings for Rust. Originally forked from and substantially based on the Krust cargo package by [adwhit](https://github.com/adwhit/krust) via [robsmith11](https://github.com/robsmith11/krust).
+kdb+ bindings for Rust. Originally forked from and substantially based on the Krust cargo package by [adwhit](https://github.com/adwhit/krust) via [robsmith11](https://github.com/robsmith11/krust).
 
 These bindings enable Rust to be used as inside Q to add additional functionality.
-More generally they also enable Rust to communicate with KDB in a memory-safe way.
+More generally they also enable Rust to communicate with kdb+ in a memory-safe way.
 
 In addition to Krust, this variant features:
 - Support for macOS
