@@ -32,6 +32,9 @@ When built for embedding, the symbols are proivded by the hosting Q process and 
 rustflags = ["-Clink-args=-Wl,-U,_ktn -Wl,-U,_knk -Wl,-U,_ku -Wl,-U,_ka -Wl,-U,_kb -Wl,-U,_kg -Wl,-U,_kh -Wl,-U,_ki -Wl,-U,_kj -Wl,-U,_ke -Wl,-U,_kf -Wl,-U,_kc -Wl,-U,_ks -Wl,-U,_kd -Wl,-U,_kz -Wl,-U,_kt -Wl,-U,_ktj -Wl,-U,_kp -Wl,-U,_kpn -Wl,-U,_xT -Wl,-U,_xD -Wl,-U,_ktd -Wl,-U,_ss -Wl,-U,_sn -Wl,-U,_ymd -Wl,-U,_dj -Wl,-U,_setm -Wl,-U,_r1 -Wl,-U,_r0 -Wl,-U,_m9 -Wl,-U,_sd1 -Wl,-U,_sd0 -Wl,-U,_sd0x -Wl,-U,_k -Wl,-U,_dl -Wl,-U,_ja -Wl,-U,_js -Wl,-U,_jk -Wl,-U,_jv -Wl,-U,_krr -Wl,-U,_orr -Wl,-U,_dot -Wl,-U,_okx -Wl,-U,_b9 -Wl,-U,_d9"]
 
 ```
+### Example
+
+Reference [kdb-rs-hash](https://github.com/redsift/kdb-rs-hash) for an example of embedding.
 
 ## Building for IPC
 
@@ -54,4 +57,4 @@ mv libkdb.so src/c
 
 ## License
 
-MIT
+Based substantially on [adwhit](https://github.com/adwhit/krust) and lisenced under the same MIT license.
