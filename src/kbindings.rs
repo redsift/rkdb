@@ -106,6 +106,7 @@ pub enum KVal<'a> {
     Float(KData<'a, f64>),
     Char(&'a i8),
     String(&'a str),
+    Err(&'a str),
     Symbol(KData<'a, *const i8>),
     Table(Box<KVal<'a>>),
     Dict(Box<KVal<'a>>, Box<KVal<'a>>), // Keys, Values
@@ -144,6 +145,14 @@ impl<'a> KVal<'a> {
                 -17 => KVal::Minute( KData::atom(k)),
                 -18 => KVal::Second( KData::atom(k)),
                 -19 => KVal::Time( KData::atom(k)),
+                -128 => {
+                    let err = {
+                        let mut ptr: [u8; 8] = [0; 8];
+                        ptr.clone_from_slice(&(*k).union[0..8]);
+                        ffi::CStr::from_ptr(std::mem::transmute::<[u8; 8], *const i8>(ptr))
+                    };
+                    KVal::Err(err.to_str().unwrap())
+                }
                 0 => {
                     let s: &[&K] = k.fetch_slice();
                     KVal::Mixed(s.iter().map(|&x| KVal::new(x)).collect())
