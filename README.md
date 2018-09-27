@@ -57,4 +57,4 @@ mv libkdb.so src/c
 
 ## License
 
-Based substantially on [adwhit](https://github.com/adwhit/krust) and lisenced under the same MIT license.
+Based substantially on [adwhit](https://github.com/adwhit/krust) and licensed under the same MIT license.
