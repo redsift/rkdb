@@ -1,7 +1,7 @@
 [package]
 name = "rkdb"
-version = "0.3.0"
-authors = ["Rahul Powar <rahul@redsift.io>"]
+version = "0.4.0"
+authors = ["Rahul Powar <rahul@redsift.io>", "Peter Parkanyi <peter@redsift.io"]
 links = "kdb"
 build = "build.rs"
 description = "KDB-Rust embedding and IPC"

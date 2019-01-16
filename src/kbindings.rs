@@ -107,7 +107,7 @@ pub enum KVal<'a> {
     Char(&'a i8),
     String(&'a str),
     Err(&'a str),
-    Symbol(KData<'a, *const i8>),
+    Symbol(KData<'a, String>),
     Table(Box<KVal<'a>>),
     Dict(Box<KVal<'a>>, Box<KVal<'a>>), // Keys, Values
     Timestamp(KData<'a, i64>),
@@ -213,10 +213,14 @@ impl<'a> KVal<'a> {
             KVal::Real(KData::List(ref vals)) => klist::<f32>(8, vals),
             KVal::Float(KData::Atom(&mut v)) => kfloat(v),
             KVal::Float(KData::List(ref vals)) => klist::<f64>(9, vals),
-            //KVal::Symbol(KData::Atom(&mut v)) => ksymbol(v),
-            KVal::Symbol(KData::List(ref vals)) => klist::<*const i8>(11, vals),
+            KVal::Symbol(KData::Atom(ref v)) => ksymbol(v),
+            KVal::Symbol(KData::List(ref vals)) => klist::<*const i8>(11, &intern_strings(vals.to_vec())),
             KVal::Dict(box ref k, box ref v) => kdict(k, v),
-            _ => kerror("NYI")
+            KVal::String(ref s) => kstring(s),
+            ref unknown => {
+                println!("{:?}", unknown);
+                kerror("NYI")
+            }
         }
     }
 
@@ -292,7 +296,7 @@ pub fn kvoid() -> *const K {
     ptr::null()
 }
 
-fn klist<T>(ktype: i32, vals: &[T]) -> &'static K {
+pub fn klist<T>(ktype: i32, vals: &[T]) -> &'static K {
     unsafe {
         let k = ktn(ktype, vals.len() as i64);
         let sx = (*k).fetch_slice::<T>();
@@ -310,7 +314,7 @@ pub fn ktable(dict: KVal) -> &'static K {
     unsafe { &*xT(dict.to_k()) }
 }
 
-fn kmixed(vals: &[KVal]) -> &'static K {
+pub fn kmixed(vals: &[KVal]) -> &'static K {
     let (k, sx);
     unsafe {
         k = &*ktn(0, vals.len() as i64);
