@@ -1,5 +1,5 @@
 use std;
-use std::mem::zeroed;
+use std::mem::{self, zeroed};
 use std::slice;
 use std::ptr;
 use std::fmt;
@@ -56,7 +56,7 @@ impl K {
     
     pub unsafe fn cast_with_ptr_offset<'a, T>(&self) -> &'a mut T {
         let u = &self.union as *const u8;
-        &mut *((u as *const usize).offset(1) as *mut T)
+        &mut *(u.add(mem::size_of::<usize>()) as *mut T)
     }
 
     #[inline]
