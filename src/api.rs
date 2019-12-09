@@ -82,9 +82,9 @@ pub struct Handle {
 
 impl Handle {
     pub fn connect(host: &str, port: i32, username: &str) -> Result<Handle, Box<Error>> {
-        let chost = try!(ffi::CString::new(host)).as_ptr();
-        let cuser = try!(ffi::CString::new(username)).as_ptr();
-        let handle = match unsafe { kapi::khpu(chost, port, cuser) } {
+        let chost = try!(ffi::CString::new(host));
+        let cuser = try!(ffi::CString::new(username));
+        let handle = match unsafe { kapi::khpu(chost.as_ptr(), port, cuser.as_ptr()) } {
             h if h < 0 => return Err(Box::new(KError::new("Could not connect".to_string(), KErr::ConnectionFailed))),
             0 => return Err(Box::new(KError::new("Wrong credentials".to_string(), KErr::AuthenticationFailed))),
             h => h
@@ -98,8 +98,8 @@ impl Handle {
     }
 
     pub fn query(&self, query: &str) -> Result<KOwned, Box<Error>> {
-        let cquery = try!(ffi::CString::new(query)).as_ptr();
-        let kptr = unsafe { kapi::k(self.handle, cquery, kvoid()) };
+        let cquery = try!(ffi::CString::new(query));
+        let kptr = unsafe { kapi::k(self.handle, cquery.as_ptr(), kvoid()) };
         if kptr.is_null() {
             return Err(Box::new(KError::new("Query failed".to_string(), KErr::QueryFailed)))
         }
