@@ -197,7 +197,7 @@ impl<'a> KVal<'a> {
     }
 
     pub fn to_k(&self) -> &K  {
-        match *self {
+        match self {
             KVal::Mixed(ref arr) => kmixed(arr),
             KVal::Bool(KData::Atom(&mut v)) => kbool(v),
             KVal::Bool(KData::List(ref vals)) => klist::<bool>(1, vals),
@@ -215,7 +215,7 @@ impl<'a> KVal<'a> {
             KVal::Float(KData::List(ref vals)) => klist::<f64>(9, vals),
             KVal::Symbol(KData::Atom(ref v)) => ksymbol(v),
             KVal::Symbol(KData::List(ref vals)) => klist::<*const i8>(11, &intern_strings(vals.to_vec())),
-            KVal::Dict(box ref k, box ref v) => kdict(k, v),
+            KVal::Dict(k, v) => kdict(&k, &v),
             KVal::String(ref s) => kstring(s),
             ref unknown => {
                 println!("{:?}", unknown);
