@@ -227,11 +227,10 @@ impl<'a> KVal<'a> {
 }
 
 pub fn intern_strings(strs: Vec<String>) -> Vec<*const i8> {
-    unsafe {
-        strs.into_iter()
-            .map(|s| ss(ffi::CString::new(s).unwrap().as_ptr()))
-            .collect() 
-    }
+    strs.into_iter()
+        .map(|s| ffi::CString::new(s).unwrap())
+        .map(|s| unsafe { ss(s.as_ptr()) })
+        .collect()
 }
 
 pub fn valid_stream(k: &K) -> bool {
@@ -245,7 +244,7 @@ pub fn deserial(k: &K) -> &K  {
 pub fn kerror(err: &str) -> &'static K {
     let mut map = ERR_STRS.lock().unwrap();
 
-    let msg = map.entry(err.to_string()).or_insert(ffi::CString::new(err).unwrap());
+    let msg = map.entry(err.to_string()).or_insert_with(|| ffi::CString::new(err).unwrap());
     let ptr = msg.as_ptr();
 
     // AFAICT, just returns a null pointer
@@ -285,11 +284,13 @@ pub fn kchar(c: char) -> &'static K {
 }
 
 pub fn kstring(s: &str) -> &'static K {
-     unsafe { &*kpn(ffi::CString::new(s).unwrap().as_ptr(), s.len() as i64) }
+    let c_str = ffi::CString::new(s).unwrap();
+    unsafe { &*kpn(c_str.as_ptr(), s.len() as i64) }
 }
 
 pub fn ksymbol(s: &str) -> &'static K {
-    unsafe { &*(ks(ffi::CString::new(s).unwrap().as_ptr())) }
+    let c_str = ffi::CString::new(s).unwrap();
+    unsafe { &*(ks(c_str.as_ptr())) }
 }
 
 pub fn kvoid() -> *const K {

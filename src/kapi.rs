@@ -1,5 +1,4 @@
 // the difference between the configurations is that api a) links to libkdb.a and b) includes ipc
-use types::*;
 
 #[cfg(feature="api")]
 #[link(name="kdb")]
