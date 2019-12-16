@@ -18,14 +18,14 @@ In addition to Krust, this variant features:
 - Dynamic export for symbols to be weak linked
 - Helpers for querying attributes on types
 
-This vairiant incorporates [robsmith11](https://github.com/robsmith11/krust) updates for the current rust nightly.
+This variant incorporates [robsmith11](https://github.com/robsmith11/krust) updates for the current rust nightly.
 
 For an example of how to embed Rust code within Q, see `demos/embed`.
 For an example of how to perform IPC between Rust and Q, see `demos/ipc`.
 
 ## Building for Embedding
 
-When built for embedding, the symbols are proivded by the hosting Q process and the library must **not** include the duplicated functions. This requires weak linking which currently needs to be manually achived on macOS by specificing all the missing symbols that should be ignored at link time. This symbols are generated at build time as the constant `rkdb::SYMBOLS` and is currently used by setting `.cargo/config` in the library target to:
+When built for embedding, the symbols are provided by the hosting Q process and the library must **not** include the duplicated functions. This requires weak linking which currently needs to be manually archived on macOS by specifying all the missing symbols that should be ignored at link time. This symbols are generated at build time as the constant `rkdb::SYMBOLS` and is currently used by setting `.cargo/config` in the library target to:
 
 ```
 [target.'cfg(target_os="macos")']
@@ -53,7 +53,7 @@ mv libkdb.so src/c
 
 - 64 bit i.e. commercial version of Q >= 3.6.
 - macOS (with XCode >=  9.4.1) and Linux.
-- rustc >= 1.30.0-nightly (33b923fd4 2018-08-18)
+- rustc >= 1.31.0
 
 ## License
 
