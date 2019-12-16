@@ -123,9 +123,12 @@ pub enum KVal<'a> {
 }
 
 impl<'a> KVal<'a> {
-    pub fn new(k: *const K) -> KVal<'a> {
+    pub unsafe fn from_raw(k: *const K) -> KVal<'a> {
+        Self::new(&*k)
+    }
+
+    pub fn new(k: &'a K) -> KVal<'a> {
         unsafe {
-            let k = &*k;
             match k.t {
                 -1 => KVal::Bool(KData::atom(k)),
                 -2 => KVal::Guid(KData::guid_atom(k)), 
@@ -184,7 +187,7 @@ impl<'a> KVal<'a> {
                 17 => KVal::Minute( KData::list(k)),
                 18 => KVal::Second( KData::list(k)),
                 19 => KVal::Time( KData::list(k)),
-                98 => KVal::Table(  Box::new(KVal::new(*k.cast::<*const K>()))),
+                98 => KVal::Table( Box::new(KVal::new(k))),
                 99 => {
                     let slice = k.fetch_slice::<&K>();
                     KVal::Dict(   Box::new(KVal::new(slice[0])),
